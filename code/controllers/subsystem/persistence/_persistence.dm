@@ -237,8 +237,8 @@ SUBSYSTEM_DEF(persistence)
 
 		// for persistent autosaves, the name is always a number which indicates the z-level
 		var/current_z = map_config.map_name
-		if(!islist(map_config.traits))
-			CRASH("Missing list of traits in autosave json for [last_save]/[current_z].json")
+//		if(!islist(map_config.traits))
+//			CRASH("Missing list of traits in autosave json for [last_save]/[current_z].json")
 
 		// for multi-z maps if a trait is found on ANY z-levels, the entire map is considered to have that trait
 		for(var/level in map_config.traits)
