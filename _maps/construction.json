@@ -12,18 +12,5 @@
 	],
 	"shuttles": {
 		"cargo": "cargo_delta"
-	},
-	"traits": [
-		{
-			"Linkage": "Cross"
-		},
-		{
-			"Baseturf": "/turf/open/openspace",
-			"Linkage": "Cross"
-		},
-		{
-			"Baseturf": "/turf/open/openspace",
-			"Linkage": "Cross"
-		}
-	]
+	}
 }
