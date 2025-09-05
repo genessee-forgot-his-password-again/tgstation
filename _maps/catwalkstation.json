@@ -11,12 +11,14 @@
 	},
 	"traits": [
 		{
-			"Up": true,
 			"Linkage": "Cross"
 		},
 		{
-			"Down": true,
-			"Baseturf": "/turf/open/openspace/airless",
+			"Baseturf": "/turf/open/openspace",
+			"Linkage": "Cross"
+		},
+		{
+			"Baseturf": "/turf/open/openspace",
 			"Linkage": "Cross"
 		}
 	]
