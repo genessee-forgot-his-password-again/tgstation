@@ -265,7 +265,7 @@
 	cost = CARGO_CRATE_VALUE * 6
 	contains = list(/obj/item/gun/ballistic/rifle/boltaction = 6)
 
-/datum/supply_pack/imports/310roundssurplus
+/datum/supply_pack/imports/nuggetroundssurplus
 	name = "Surplus .310 Stripper Clips"
 	desc = "Enjoying our fine rifles, comrade? You want more bullets, but don't want to print more yourself? \
 		We have just the thing - ten stripper clips of the finest .310 Russian rounds on the market!"
@@ -273,6 +273,14 @@
 	cost = CARGO_CRATE_VALUE * 5
 	contains = list(/obj/item/ammo_box/strilka310/surplus = 10)
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
+
+/datum/supply_pack/imports/nuggetroundsgood
+	name = "Standardized .310 Stripper Clips"
+	desc = "All right, Comrade Operative, you know we're holding out on the station -- but not on you! \
+		We have proper .310 rounds, ten clips for huge discount! Works wonders for putting down the corporate pig-dogs, we assure you!"
+	hidden = TRUE
+	cost = CARGO_CRATE_VALUE * 4
+	contains = list(/obj/item/ammo_box/strilka310 = 10)
 
 /datum/supply_pack/imports/liberator
 	name = "Liberator Pistol Pack"
