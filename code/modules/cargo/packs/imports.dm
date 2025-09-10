@@ -289,7 +289,7 @@
 		If it blows up in your hand, though, it ain't my problem. No refunds."
 	contraband = TRUE
 	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/obj/item/gun/ballistic/automatic/pistol/doorhickeys = 12)
+	contains = list(/obj/item/gun/ballistic/automatic/pistol/doorhickey = 12)
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 
 /datum/supply_pack/imports/vehicle
