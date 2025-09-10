@@ -82,8 +82,8 @@
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 
 /datum/supply_pack/imports/dumpstercorpse
-	name = "A....Dumpster?"
-	desc = "Why does it smell so bad...."
+	name = "Foul-smelling Dumpster"
+	desc = "Don't ask questions that you don't want the answer to, capiche?"
 	cost = CARGO_CRATE_VALUE * 5
 	contains = list(/mob/living/carbon/human)
 	crate_name = "putrid dumpster"
@@ -95,9 +95,9 @@
 	corpse.death()
 
 /datum/supply_pack/imports/dumpsterloot
-	name = "A....Dumpster"
-	desc = "I'm not sure why you bothered to buy this...and why does it cost so much?"
-	cost = CARGO_CRATE_VALUE * 5
+	name = "Surplus Dumpster"
+	desc = "Comes pre-filled with trash. Wow!"
+	cost = CARGO_CRATE_VALUE * 2
 	contains = list(
 		/obj/effect/spawner/random/maintenance/three,
 		/obj/effect/spawner/random/trash/garbage = 5,
@@ -246,6 +246,15 @@
 		var/item = pick(contains)
 		new item(our_crate)
 
+/datum/supply_pack/imports/surplusnugget
+	name = "Sakhno M4224 Army Rifle"
+	desc = "Good day comrade! You tired of buying many surplus crates full of garbage just for high-quality rifle? \
+		Look no further -- we offer just the thing you seek for special price!"
+	contraband = TRUE
+	cost = CARGO_CRATE_VALUE * 6
+	contains = list(/obj/item/storage/toolbox/guncase/soviet)
+	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
+
 /datum/supply_pack/imports/moistnuggets
 	name = "Refurbished Sakhno Precision Rifle Crate"
 	desc = "Hello Comrade Operative. You need gun? You hate garbage we sell to station normally? \
@@ -255,6 +264,25 @@
 	hidden = TRUE
 	cost = CARGO_CRATE_VALUE * 6
 	contains = list(/obj/item/gun/ballistic/rifle/boltaction = 6)
+
+/datum/supply_pack/imports/310roundssurplus
+	name = "Surplus .310 Stripper Clips"
+	desc = "Enjoying our fine rifles, comrade? You want more bullets, but don't want to print more yourself? \
+		We have just the thing - ten stripper clips of the finest .310 Russian rounds on the market!"
+	contraband = TRUE
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(/obj/item/ammo_box/strilka310/surplus = 10)
+	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
+
+/datum/supply_pack/imports/liberator
+	name = "Liberator Pistol Pack"
+	desc = "Want to put a hole in someone and don't expect to get a second shot? \
+		No problem. These mass-printed pistols will handle it - and you get a dozen of 'em to arm your whole gang. \
+		If it blows up in your hand, though, it ain't my problem. No refunds."
+	contraband = TRUE
+	cost = CARGO_CRATE_VALUE * 4
+	contains = list(/obj/item/gun/ballistic/automatic/pistol/doorhickeys = 12)
+	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 
 /datum/supply_pack/imports/vehicle
 	name = "Biker Gang Kit" //TUNNEL SNAKES OWN THIS TOWN
