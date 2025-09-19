@@ -99,7 +99,7 @@
 	desc = "Comes pre-filled with trash. Wow!"
 	cost = CARGO_CRATE_VALUE * 2
 	contains = list(
-		/obj/effect/spawner/random/maintenance/three,
+		/obj/effect/spawner/random/maintenance/dumpster,
 		/obj/effect/spawner/random/trash/garbage = 5,
 	)
 	crate_name = "putrid dumpster"

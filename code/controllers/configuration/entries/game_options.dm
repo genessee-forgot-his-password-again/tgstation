@@ -507,22 +507,16 @@
 // Configs for persistent map saving and loading
 /// This will load the most recent saved maps, z-levels, and jsons in the _maps/persistence folder organized by year/month/day/hour-minute-second
 /datum/config_entry/flag/persistent_save_enabled
-/// Whether to include the centcom z levels (by default this is turned off)
-/datum/config_entry/flag/persistent_save_centcom_z_levels
-/// Whether to include the station z levels
-/datum/config_entry/flag/persistent_save_station_z_levels
-/// Whether to include empty z levels
-/datum/config_entry/flag/persistent_save_space_empty_z_levels
-/// Whether to include space z levels and ruins
-/datum/config_entry/flag/persistent_save_space_ruin_z_levels
-/// Whether to include ice z levels and ruins
-/datum/config_entry/flag/persistent_save_ice_ruin_z_levels
-/// Whether to include mining z levels
-/datum/config_entry/flag/persistent_save_mining_z_levels
-/// Whether to include transitional z levels used for shuttle movement (by default this is turned off)
-/datum/config_entry/flag/persistent_save_transitional_z_levels
-/// Whether to include away mission (gateway) z levels (by default this is turned off)
-/datum/config_entry/flag/persistent_save_away_z_levels
+/// Include specific z-levels when saving and loading determined by trait
+/datum/config_entry/keyed_list/persistent_save_z_levels
+	key_mode = KEY_MODE_TEXT
+	value_mode = VALUE_MODE_FLAG
+	lowercase_key = FALSE //The macros are written the exact same way as their values
+/// Include specific save flags that determines types and data to save and load
+/datum/config_entry/keyed_list/persistent_save_flags
+	key_mode = KEY_MODE_TEXT
+	value_mode = VALUE_MODE_FLAG
+	lowercase_key = FALSE
 /// If enabled, disables procedural grid generation and loads the pre-configured layout from z-level JSONs.
 /datum/config_entry/flag/persistent_use_static_map_grid
 /// Period of time in hours between map autosaves (set to -1 to only allow saving when server reboots)
@@ -534,19 +528,4 @@
 /datum/config_entry/number/persistent_max_autosaves
 	default = -1
 	min_val = -1
-/// Include specific save flags that determines types and data to save and load
-/// Whether to include object types /obj
-/datum/config_entry/flag/persistent_save_objects
-/// Whether to include mob types /mob (ignores mob/living/carbon but not animals)
-/datum/config_entry/flag/persistent_save_mobs
-/// Whether to include turf types /turf, if disabled saved as /turf/template_noop
-/datum/config_entry/flag/persistent_save_turfs
-/// Whether to include area types /area, if disabled saved as /area/template_noop
-/datum/config_entry/flag/persistent_save_areas
-/// Whether to include space turf types /turf/open/space, if disabled saved as /turf/template_noop
-/// Also any /obj, /area, /mob, etc. on space turfs with this disabled will not be included
-/datum/config_entry/flag/persistent_save_space
-/// Whether to include custom object properties that is determined by an obj.on_object_saved()
-/datum/config_entry/flag/persistent_save_object_properties
-/// Whether to include the atmos properties (gases/temp/etc.) for turfs
-/datum/config_entry/flag/persistent_save_atmos
+
