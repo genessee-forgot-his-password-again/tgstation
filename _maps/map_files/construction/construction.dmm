@@ -3,11 +3,8 @@
 /turf/open/space/basic,
 /area/space)
 "ab" = (
-/obj/item/wrench,
-/turf/open/floor/plating{
-	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
-	},
-/area/station/hallway/secondary/entry)
+/turf/closed/wall/r_wall,
+/area/station/command/gateway)
 "ac" = (
 /turf/open/space/basic,
 /area/space/nearstation)
@@ -63,13 +60,8 @@
 	},
 /area/station/hallway/secondary/entry)
 "bY" = (
-/obj/machinery/power/port_gen/pacman,
-/obj/item/stack/sheet/mineral/plasma/fifty,
-/obj/machinery/light/directional/south,
-/turf/open/floor/plating{
-	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
-	},
-/area/station/hallway/secondary/entry)
+/turf/closed/wall/r_wall,
+/area/station/maintenance/port)
 "ce" = (
 /obj/machinery/door/airlock/external/glass,
 /obj/structure/fans/tiny,
@@ -115,7 +107,7 @@
 /area/station/hallway/secondary/entry)
 "fm" = (
 /turf/closed/wall,
-/area/station/engineering/gravity_generator)
+/area/station/maintenance/port)
 "fn" = (
 /obj/machinery/status_display/supply,
 /turf/closed/wall/r_wall,
@@ -165,10 +157,8 @@
 /turf/open/space,
 /area/space/nearstation)
 "gy" = (
-/obj/structure/rack,
-/obj/item/stack/sheet/glass/fifty,
-/obj/item/stack/sheet/iron/fifty,
-/obj/machinery/light/directional/south,
+/obj/structure/cable,
+/obj/machinery/light/directional/west,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
@@ -176,16 +166,25 @@
 "gE" = (
 /obj/machinery/power/apc/auto_name/directional/south,
 /obj/machinery/power/terminal,
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-1"
+/obj/structure/cable,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/maintenance/port)
+"gF" = (
+/obj/machinery/computer/order_console/mining,
+/obj/machinery/power/terminal{
+	dir = 8
 	},
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
-/area/station/engineering/gravity_generator)
-"gF" = (
-/obj/machinery/computer/order_console/mining,
+/area/station/hallway/secondary/entry)
+"je" = (
+/obj/structure/cable,
+/obj/machinery/door/airlock/engineering{
+	name = "Gravity Generator"
+	},
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
@@ -195,37 +194,73 @@
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
 /area/station/engineering/gravity_generator)
-"un" = (
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-1-8"
+"sO" = (
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/south,
+/obj/machinery/power/terminal,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
+/area/station/engineering/gravity_generator)
+"tD" = (
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/maintenance/port)
+"un" = (
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/command/gateway)
+"uO" = (
+/turf/closed/wall,
+/area/station/command/gateway)
+"uQ" = (
+/obj/structure/rack,
+/obj/item/stack/sheet/mineral/plasma/fifty,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/maintenance/port)
+"vs" = (
+/obj/effect/landmark/observer_start,
+/obj/structure/cable,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
 /area/station/hallway/secondary/entry)
-"uO" = (
-/obj/structure/table,
+"wP" = (
+/obj/item/wrench,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/maintenance/port)
+"xv" = (
+/obj/structure/cable,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/hallway/secondary/entry)
+"yY" = (
+/obj/structure/rack,
 /obj/item/storage/box/rndboards,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
+/area/station/maintenance/port)
+"Aw" = (
+/turf/closed/wall,
 /area/station/hallway/secondary/entry)
-"vs" = (
-/obj/effect/landmark/observer_start,
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-4-8"
-	},
+"Fq" = (
+/obj/machinery/computer/gateway_control,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
-/area/station/hallway/secondary/entry)
-"xv" = (
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-4-8"
-	},
+/area/station/command/gateway)
+"Gi" = (
+/obj/structure/window/reinforced/fulltile,
+/obj/structure/grille,
+/obj/structure/cable,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
@@ -243,35 +278,55 @@
 /turf/open/space,
 /area/space/nearstation)
 "Hc" = (
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-2-4"
-	},
+/obj/structure/cable,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
-/area/station/engineering/gravity_generator)
+/area/station/maintenance/port)
 "Is" = (
-/obj/machinery/door/airlock/engineering{
-	name = "Gravity Generator"
+/obj/machinery/door/airlock/maintenance,
+/obj/structure/cable,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-4-8"
+/area/station/maintenance/port)
+"KX" = (
+/obj/machinery/airalarm/directional/south,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/command/gateway)
+"LH" = (
+/obj/structure/cable,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/command/gateway)
+"Nt" = (
+/obj/structure/cable,
+/obj/machinery/door/airlock/command{
+	name = "Gateway Access"
 	},
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
-/area/station/engineering/gravity_generator)
+/area/station/hallway/secondary/entry)
+"Op" = (
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/north,
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/command/gateway)
 "OU" = (
 /obj/machinery/power/terminal{
 	dir = 1
 	},
 /obj/machinery/power/apc/auto_name/directional/north,
-/obj/structure/cable{
-	color = "#ffff00";
-	icon_state = "l2-2"
-	},
+/obj/structure/cable,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
@@ -287,17 +342,35 @@
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
-/area/station/hallway/secondary/entry)
+/area/station/maintenance/port)
 "Rb" = (
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/space)
+"Te" = (
+/obj/machinery/gateway,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/command/gateway)
+"YA" = (
+/obj/structure/cable,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/engineering/gravity_generator)
 "YL" = (
 /obj/machinery/airalarm/directional/north,
 /turf/open/floor/plating{
 	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
 	},
 /area/station/hallway/secondary/entry)
+"Zp" = (
+/obj/machinery/power/port_gen/pacman,
+/turf/open/floor/plating{
+	initial_gas_mix = "o2=50.41n2=53.36co2=0.01TEMP=293.09"
+	},
+/area/station/maintenance/port)
 
 (1,1,1) = {"
 aa
@@ -370,11 +443,11 @@ dV
 dV
 dV
 dV
-ak
-ak
-ak
-ak
-ak
+bY
+bY
+bY
+bY
+bY
 dV
 dV
 dV
@@ -462,11 +535,11 @@ ac
 ac
 ac
 aa
-ak
-jZ
-jZ
-jZ
-ak
+bY
+yY
+wP
+Px
+bY
 aa
 aa
 dt
@@ -554,11 +627,11 @@ ac
 ac
 ac
 aa
-ak
-jZ
-jZ
-fL
-ak
+bY
+tD
+tD
+uQ
+bY
 aa
 dt
 dt
@@ -646,11 +719,11 @@ ac
 ac
 ac
 aa
-ak
-Pr
+bY
+Zp
 Hc
 gE
-ak
+bY
 dt
 dt
 dt
@@ -738,11 +811,11 @@ ac
 ac
 ac
 ac
-ak
+bY
 fm
 Is
 fm
-ak
+bY
 dt
 dt
 dt
@@ -833,7 +906,7 @@ ac
 dY
 db
 xv
-bY
+GQ
 dY
 dt
 dt
@@ -925,7 +998,7 @@ ac
 bp
 eQ
 vs
-ab
+eQ
 dY
 dt
 dt
@@ -1015,7 +1088,7 @@ ac
 ac
 ac
 dY
-eQ
+db
 xv
 eQ
 dY
@@ -1293,7 +1366,7 @@ ac
 el
 eQ
 xv
-eQ
+GQ
 dY
 dt
 dt
@@ -1475,7 +1548,7 @@ ac
 ac
 ac
 dY
-eQ
+db
 xv
 eQ
 bQ
@@ -1659,7 +1732,7 @@ ac
 ac
 ac
 dY
-eQ
+db
 xv
 eQ
 bQ
@@ -1844,8 +1917,8 @@ dV
 dV
 dY
 OU
-un
-gy
+xv
+GQ
 dY
 dt
 dt
@@ -1935,9 +2008,9 @@ dt
 dt
 dt
 dY
-db
 eQ
-Px
+xv
+eQ
 dY
 dt
 dt
@@ -2028,8 +2101,8 @@ dt
 dt
 dY
 eQ
+xv
 eQ
-uO
 dY
 dt
 dt
@@ -2120,7 +2193,7 @@ dt
 dt
 dY
 eQ
-eQ
+xv
 eQ
 el
 dt
@@ -2212,7 +2285,7 @@ dt
 dt
 dY
 eQ
-eQ
+xv
 eQ
 bQ
 gv
@@ -2304,7 +2377,7 @@ dt
 dt
 dY
 eQ
-eQ
+xv
 eQ
 el
 dt
@@ -2389,14 +2462,14 @@ dY
 dY
 dY
 dY
-dY
+gk
 ce
-dY
+gk
 dY
 dY
 dY
 cV
-gk
+Gi
 cV
 dY
 dt
@@ -2476,19 +2549,19 @@ aa
 aa
 aa
 aa
-dY
+el
+eQ
+eQ
 bh
 eQ
 eQ
-eQ
-bh
 eQ
 fM
 gF
 bh
 cV
 eQ
-eQ
+xv
 GQ
 dY
 dt
@@ -2568,21 +2641,21 @@ aa
 aa
 aa
 aa
-dY
-bs
-eQ
-ag
-eQ
-bs
+el
 eQ
 eQ
 eQ
-bs
-cV
 eQ
 eQ
-GQ
-dY
+eQ
+eQ
+eQ
+eQ
+gk
+eQ
+xv
+eQ
+el
 dt
 dt
 dt
@@ -2657,23 +2730,23 @@ aa
 aa
 aa
 aa
-Rb
-dV
-dV
-dY
-fn
-bp
-fn
-bp
-fn
-dY
-dY
-dY
-dY
-dY
+aa
+aa
+aa
+el
+bs
+eQ
+ag
+eQ
+bs
+eQ
+eQ
+eQ
+bs
 cV
-gk
-cV
+eQ
+xv
+GQ
 dY
 dt
 dt
@@ -2749,36 +2822,36 @@ aa
 aa
 aa
 aa
+Rb
 dV
-dt
-dt
-dt
-dt
-fs
-dt
-dt
-dt
-dt
-dt
-dt
-ac
+dV
 dY
-eQ
-eQ
-eQ
 dY
-dV
-dV
-dV
-dV
-dV
-dV
-dV
-dV
-dV
-dV
-dV
-dV
+bp
+fn
+bp
+dY
+gk
+gk
+gk
+dY
+dY
+cV
+Gi
+cV
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
 dV
 dV
 Rb
@@ -2846,31 +2919,31 @@ dt
 dt
 dt
 dt
+fs
 dt
 dt
 dt
 dt
 dt
 dt
-dt
-dt
+ac
 dY
 eQ
+xv
+xv
+xv
+xv
+xv
+gy
+xv
+xv
+xv
+xv
+xv
+gy
 eQ
 eQ
-dY
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+el
 aa
 aa
 aa
@@ -2950,19 +3023,19 @@ dY
 eQ
 eQ
 eQ
-dY
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+eQ
+bs
+eQ
+xv
+eQ
+bs
+eQ
+bs
+eQ
+xv
+eQ
+bs
+el
 aa
 aa
 aa
@@ -3039,22 +3112,22 @@ dt
 dt
 dt
 dY
-db
-eQ
-GQ
+el
+el
+el
 dY
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+Aw
+Aw
+Nt
+Aw
+Aw
+Aw
+Aw
+Aw
+je
+Aw
+Aw
+dY
 aa
 aa
 aa
@@ -3130,23 +3203,23 @@ dt
 dt
 dt
 dt
-dY
-eQ
-eQ
-eQ
-dY
+dV
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ab
+Op
+LH
+LH
+un
+KX
+uO
+Pr
+jZ
+YA
+YA
+sO
+ak
 aa
 aa
 aa
@@ -3222,23 +3295,23 @@ dt
 dt
 dt
 dt
-dY
-eQ
-eQ
-eQ
-dY
+dV
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ab
+un
+un
+un
+un
+un
+uO
+jZ
+jZ
+jZ
+jZ
+jZ
+ak
 aa
 aa
 aa
@@ -3313,29 +3386,121 @@ dt
 dt
 dt
 dt
-ac
-dY
-eQ
-eQ
-eQ
-dY
+dt
+dV
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ab
+un
+un
+Te
+un
+un
+uO
+jZ
+jZ
+jZ
+fL
+jZ
+ak
 aa
 aa
 aa
 "}
 (34,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+dV
+dt
+dt
+dt
+dt
+dt
+dt
+dt
+dt
+dt
+dt
+dt
+ac
+dV
+aa
+aa
+aa
+ab
+un
+un
+un
+Fq
+un
+uO
+jZ
+jZ
+jZ
+jZ
+jZ
+ak
+aa
+aa
+aa
+"}
+(35,1,1) = {"
 aa
 aa
 aa
@@ -3406,115 +3571,23 @@ dV
 dV
 dV
 dV
-dY
-dY
-dY
-dY
-dY
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-"}
-(35,1,1) = {"
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+Rb
+aa
+aa
+aa
+ab
+un
+un
+un
+un
+un
+uO
+jZ
+jZ
+jZ
+jZ
+jZ
+ak
 aa
 aa
 aa
@@ -3594,19 +3667,19 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ak
+ak
+ak
+ak
+ak
+ak
 aa
 aa
 aa
