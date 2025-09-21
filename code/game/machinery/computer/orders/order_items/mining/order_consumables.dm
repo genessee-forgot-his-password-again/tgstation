@@ -9,14 +9,42 @@
 	purchase_path = /obj/item/reagent_containers/hypospray/medipen/survival/luxury
 	cost_per_order = 750
 
-/datum/orderable_item/consumables/medkit
+/datum/orderable_item/consumables/suture
+	purchase_path = /obj/item/stack/medical/suture
+	cost_per_order = 50
+
+/datum/orderable_item/consumables/mesh
+	purchase_path = /obj/item/stack/medical/mesh
+	cost_per_order = 50
+
+/datum/orderable_item/consumables/medkit_basic
+	purchase_path = /obj/item/storage/medkit/regular
+	cost_per_order = 200
+
+/datum/orderable_item/consumables/medkit_brute
 	purchase_path = /obj/item/storage/medkit/brute
 	cost_per_order = 400
 
 /datum/orderable_item/consumables/medkit_fire
 	purchase_path = /obj/item/storage/medkit/fire
 	desc = "For emergency magmatic burn relief."
-	cost_per_order = 500
+	cost_per_order = 400
+
+/datum/orderable_item/consumables/medkit_oxy
+	purchase_path = /obj/item/storage/medkit/o2
+	cost_per_order = 400
+
+/datum/orderable_item/consumables/medkit_tox
+	purchase_path = /obj/item/storage/medkit/toxin
+	cost_per_order = 400
+
+/datum/orderable_item/consumables/medkit_advanced
+	purchase_path = /obj/item/storage/medkit/advanced
+	cost_per_order = 600
+
+/datum/orderable_item/consumables/beer
+	purchase_path = /obj/item/reagent_containers/cup/glass/bottle/beer
+	cost_per_order = 20
 
 /datum/orderable_item/consumables/whiskey
 	purchase_path = /obj/item/reagent_containers/cup/glass/bottle/whiskey
@@ -26,16 +54,21 @@
 	purchase_path = /obj/item/reagent_containers/cup/glass/bottle/absinthe/premium
 	cost_per_order = 100
 
+/datum/orderable_item/consumables/rations
+	purchase_path = /obj/item/storage/box/mothic_rations
+	cost_per_order = 200
+
+/datum/orderable_item/consumables/donk
+	purchase_path = /obj/effect/spawner/random/food_or_drink/donkpockets
+	desc = "A box of one of Donk Corporation's finest flavored Donk Pockets."
+	cost_per_order = 400
+
 /datum/orderable_item/consumables/bubblegum
 	purchase_path = /obj/item/storage/box/gum/bubblegum
 	cost_per_order = 100
 
 /datum/orderable_item/consumables/havana_cigars
-	purchase_path = /obj/item/cigarette/cigar/havana
-	cost_per_order = 150
-
-/datum/orderable_item/consumables/havana_cigars
-	purchase_path = /obj/item/cigarette/cigar/havana
+	purchase_path = /obj/item/storage/fancy/cigarettes/cigars/havana
 	cost_per_order = 150
 
 /datum/orderable_item/consumables/tracking_implants
