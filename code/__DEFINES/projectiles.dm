@@ -64,6 +64,8 @@
 #define CALIBER_JUNK "junk"
 /// The caliber used by the (gatfruit) peashooter
 #define CALIBER_PEA "pea"
+/// The caliber used by the P16 AR
+#define CALIBER_556 "5.56mm"
 
 /// For gunpoints, how many tiles around the target the shooter can roam without losing their shot
 #define GUNPOINT_SHOOTER_STRAY_RANGE 2

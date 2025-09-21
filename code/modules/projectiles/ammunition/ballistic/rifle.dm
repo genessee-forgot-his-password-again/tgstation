@@ -181,3 +181,12 @@
 	base_icon_state = "paperball"
 	projectile_type = /obj/projectile/bullet/paperball
 	newtonian_force = 0.5
+
+// 5.56 for P16
+
+/obj/item/ammo_casing/a556
+	name = "5.56mm bullet casing"
+	desc = "A 5.56mm bullet casing for use in large rifles."
+	icon_state = "223-casing"
+	caliber = CALIBER_556
+	projectile_type = /obj/projectile/bullet/a556

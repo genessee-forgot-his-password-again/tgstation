@@ -235,6 +235,19 @@
 	burst_size = 3
 	burst_delay = 1
 
+/obj/item/gun/ballistic/automatic/p16
+	name = "\improper P16 assault rifle"
+	desc = "An assault rifle favored by wealthier mercenaries, private security forces, criminals, and \
+	other 'independent' elements. This model is loosely based off of the ancient M16 rifle."
+	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
+	icon_state = "p16"
+	inhand_icon_state = "p16"
+	slot_flags = ITEM_SLOT_BACK
+	accepted_magazine_type = /obj/item/ammo_box/magazine/p16
+	can_suppress = FALSE
+	burst_size = 3
+	burst_delay = 1
+
 // L6 SAW //
 
 /obj/item/gun/ballistic/automatic/l6_saw
