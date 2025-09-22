@@ -19,18 +19,22 @@
 
 /datum/orderable_item/mining/basic_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/civilian
+	desc = "A basic civilian MODsuit."
 	cost_per_order = 1500
 
 /datum/orderable_item/mining/cargo_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/loader
+	desc = "A cargo-themed MODsuit that works best when hauling crates in a logistics environment."
 	cost_per_order = 2000
 
 /datum/orderable_item/mining/engi_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/engineering
+	desc = "An engineering-themed MODsuit that works best when repairing the station."
 	cost_per_order = 2500
 
 /datum/orderable_item/mining/atmos_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/atmospheric
+	desc = "A atmospheric-themed MODsuit that works best when working in the land of pipes."
 	cost_per_order = 2500
 
 /datum/orderable_item/mining/mining_modsuit
@@ -40,14 +44,17 @@
 
 /datum/orderable_item/mining/med_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/medical
+	desc = "A medical-themed MODsuit that works best when treating patients."
 	cost_per_order = 2500
 
 /datum/orderable_item/mining/science_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/research
+	desc = "A science-themed MODsuit that works best when researching the unknown."
 	cost_per_order = 2500
 
 /datum/orderable_item/mining/sec_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/security
+	desc = "A security-themed MODsuit that works best when fighting enemies of nanotrasen."
 	cost_per_order = 4000
 
 /datum/orderable_item/mining/mining_belt
