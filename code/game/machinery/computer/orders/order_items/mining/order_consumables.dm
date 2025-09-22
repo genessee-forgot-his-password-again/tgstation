@@ -54,6 +54,10 @@
 	purchase_path = /obj/item/reagent_containers/cup/glass/bottle/absinthe/premium
 	cost_per_order = 100
 
+/datum/orderable_item/consumables/readydonk
+	purchase_path = /obj/item/food/ready_donk
+	cost_per_order = 100
+
 /datum/orderable_item/consumables/rations
 	purchase_path = /obj/item/storage/box/mothic_rations
 	cost_per_order = 200
@@ -66,10 +70,6 @@
 /datum/orderable_item/consumables/bubblegum
 	purchase_path = /obj/item/storage/box/gum/bubblegum
 	cost_per_order = 100
-
-/datum/orderable_item/consumables/havana_cigars
-	purchase_path = /obj/item/storage/fancy/cigarettes/cigars/havana
-	cost_per_order = 150
 
 /datum/orderable_item/consumables/tracking_implants
 	purchase_path = /obj/item/storage/box/minertracker

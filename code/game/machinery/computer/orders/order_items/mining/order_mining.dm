@@ -17,10 +17,38 @@
 	purchase_path = /obj/item/fulton_core
 	cost_per_order = 320
 
+/datum/orderable_item/mining/basic_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/civilian
+	cost_per_order = 1500
+
+/datum/orderable_item/mining/cargo_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/loader
+	cost_per_order = 2000
+
+/datum/orderable_item/mining/engi_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/engineering
+	cost_per_order = 2500
+
+/datum/orderable_item/mining/atmos_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/atmospheric
+	cost_per_order = 2500
+
 /datum/orderable_item/mining/mining_modsuit
 	purchase_path = /obj/item/mod/control/pre_equipped/mining
 	desc = "A mining-themed MODsuit that works best when in a mining environment."
 	cost_per_order = 2500
+
+/datum/orderable_item/mining/med_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/medical
+	cost_per_order = 2500
+
+/datum/orderable_item/mining/science_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/research
+	cost_per_order = 2500
+
+/datum/orderable_item/mining/sec_modsuit
+	purchase_path = /obj/item/mod/control/pre_equipped/security
+	cost_per_order = 4000
 
 /datum/orderable_item/mining/mining_belt
 	purchase_path = /obj/item/storage/belt/mining
