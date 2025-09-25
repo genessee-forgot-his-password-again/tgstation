@@ -57,6 +57,30 @@
 	desc = "A security-themed MODsuit that works best when fighting enemies of nanotrasen."
 	cost_per_order = 4000
 
+/datum/orderable_item/mining/knife
+	purchase_path = /obj/item/knife/hunting
+	cost_per_order = 400
+
+/datum/orderable_item/mining/shotgunrubbers
+	purchase_path = /obj/item/storage/box/rubbershot
+	cost_per_order = 200
+
+/datum/orderable_item/mining/shotgunslug
+	purchase_path = /obj/item/storage/box/slugs
+	cost_per_order = 600
+
+/datum/orderable_item/mining/shotgunbuck
+	purchase_path = /obj/item/storage/box/lethalshot
+	cost_per_order = 800
+
+/datum/orderable_item/mining/dbshotgun
+	purchase_path = /obj/item/gun/ballistic/shotgun/doublebarrel
+	cost_per_order = 2500
+
+/datum/orderable_item/mining/riotshotgun
+	purchase_path = /obj/item/gun/ballistic/shotgun/riot
+	cost_per_order = 6000
+
 /datum/orderable_item/mining/mining_belt
 	purchase_path = /obj/item/storage/belt/mining
 	cost_per_order = 450
