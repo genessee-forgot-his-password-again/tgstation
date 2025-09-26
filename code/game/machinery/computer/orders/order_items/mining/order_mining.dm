@@ -81,6 +81,18 @@
 	purchase_path = /obj/item/gun/ballistic/shotgun/riot
 	cost_per_order = 6000
 
+/datum/orderable_item/mining/detrevolver_sl
+	purchase_path = /obj/item/ammo_box/c38
+	cost_per_order = 100
+
+/datum/orderable_item/mining/detrevolver_sldd
+	purchase_path = /obj/item/ammo_box/c38/dumdum
+	cost_per_order = 250
+
+/datum/orderable_item/mining/detrevolver
+	purchase_path = /obj/item/gun/ballistic/revolver/c38
+	cost_per_order = 5000
+
 /datum/orderable_item/mining/mining_belt
 	purchase_path = /obj/item/storage/belt/mining
 	cost_per_order = 450

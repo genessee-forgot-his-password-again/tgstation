@@ -112,21 +112,6 @@
 	purchase_path = /obj/item/storage/box/minertracker
 	cost_per_order = 600
 
-/datum/orderable_item/consumables/onecr
-	purchase_path = /obj/item/stack/spacecash/c1
-	desc = "A stack of space cash worth 1 credit."
-	cost_per_order = 2
-
-/datum/orderable_item/consumables/tencr
-	purchase_path = /obj/item/stack/spacecash/c10
-	desc = "A stack of space cash worth 10 credits."
-	cost_per_order = 20
-
-/datum/orderable_item/consumables/hundredcr
-	purchase_path = /obj/item/stack/spacecash/c100
-	desc = "A stack of space cash worth 100 credits."
-	cost_per_order = 200
-
 /datum/orderable_item/consumables/thousandcr
 	purchase_path = /obj/item/stack/spacecash/c1000
 	desc = "A stack of space cash worth 1000 credits."

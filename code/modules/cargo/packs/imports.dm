@@ -107,18 +107,15 @@
 	test_ignored = TRUE
 
 /datum/supply_pack/imports/shells
-	name = "Lethal Shotgun Shell Box Crate"
-	desc = "Contains three boxes of buckshot shotgun shells. \
-		Due to Nanotrasen's failure to secure exclusive manufacturing rights \
-		during the Spinward Hunting and Shooting policy hearings, this import \
-		is heavily taxed, despite being 'legal'. I hope the price tag is worth it."
-	cost = CARGO_CRATE_VALUE * 10
-	access = ACCESS_ARMORY
-	access_view = ACCESS_ARMORY
+	name = "Donk! Co. 'Spike' Shells"
+	desc = "Contains two boxes of 'Donk Spike' shotgun shells, produced \
+		by the Donk Corporation. Lethal, but the amount of concerning rumors \
+		regarding the product means that they aren't usually sold on the main market."
+	cost = CARGO_CRATE_VALUE * 5
 	contains = list(
-		/obj/item/storage/box/lethalshot = 3,
+		/obj/item/storage/box/donkpockets/donkpocketshell = 2,
 	)
-	crate_name = "shotgun shell crate"
+	crate_name = "donk spike shell crate"
 	crate_type = /obj/structure/closet/crate/secure/weapon
 
 /datum/supply_pack/imports/error
@@ -291,6 +288,15 @@
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/doorhickey = 12)
 	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
+
+/datum/supply_pack/imports/sus_maintenance_kits
+	name = "Discount Dan's Gun Maintenance Toolset Pack Deluxe"
+	desc = "Two gun maintenance kits for the repair and maintenance of a firearm, \
+		if not for the fact that these appear to be shockingly low-quality. \
+		You get what you pay for."
+	contains = list(/obj/item/gun_maintenance_supplies/makeshift = 2)
+	cost = CARGO_CRATE_VALUE
+	crate_name = "budget gun maintenance kit crate"
 
 /datum/supply_pack/imports/vehicle
 	name = "Biker Gang Kit" //TUNNEL SNAKES OWN THIS TOWN

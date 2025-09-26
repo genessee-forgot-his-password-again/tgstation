@@ -3,19 +3,41 @@
 	access = ACCESS_SECURITY
 	crate_type = /obj/structure/closet/crate/secure/gear
 
-/datum/supply_pack/security/ammo
-	name = "Ammo Crate"
-	desc = "Contains three boxes of beanbag shotgun shells, three boxes \
-		of rubbershot shotgun shells and one of each special .38 speedloaders."
-	cost = CARGO_CRATE_VALUE * 8
+/datum/supply_pack/security/nonlethalshotgunammo
+	name = "Non-Lethal Shotgun Ammo Crate"
+	desc = "Contains three boxes of beanbag shotgun shells and three boxes \
+		of rubbershot shotgun shells."
+	cost = CARGO_CRATE_VALUE * 6
 	access_view = ACCESS_ARMORY
 	contains = list(/obj/item/storage/box/beanbag = 3,
-					/obj/item/storage/box/rubbershot = 3,
-					/obj/item/ammo_box/c38/trac,
-					/obj/item/ammo_box/c38/hotshot,
-					/obj/item/ammo_box/c38/iceblox,
+					/obj/item/storage/box/rubbershot = 3
 				)
-	crate_name = "ammo crate"
+	crate_name = "nonlethal shotgun ammo crate"
+
+/datum/supply_pack/security/lethalshotgunammo
+	name = "Lethal Shotgun Ammo Crate"
+	desc = "Contains three boxes of buckshot shotgun shells and three boxes \
+		of shotgun slugs."
+	cost = CARGO_CRATE_VALUE * 10
+	access = ACCESS_ARMORY
+	access_view = ACCESS_ARMORY
+	contains = list(
+		/obj/item/storage/box/lethalshot = 3,
+		/obj/item/storage/box/slugs = 3
+	)
+	crate_name = "lethal shotgun ammo crate"
+
+/datum/supply_pack/security/detrevolverammo
+	name = ".38 Speedloaders Crate"
+	desc = "Contains five standard .38 speedloaders, plus one Hotshot and \
+		Iceblox speedloader - all for the .38 revolver."
+	cost = CARGO_CRATE_VALUE * 7
+	access_view = ACCESS_ARMORY
+	contains = list(/obj/item/ammo_box/c38 = 5,
+					/obj/item/ammo_box/c38/hotshot,
+					/obj/item/ammo_box/c38/iceblox
+				)
+	crate_name = ".38 speedloaders crate"
 
 /datum/supply_pack/security/armor
 	name = "Armor Crate"
@@ -211,6 +233,22 @@
 	contains = list(/obj/item/storage/box/chemimp)
 	crate_name = "chemical implant crate"
 
+/datum/supply_pack/security/armory/dbshotgun
+	name = "Double-Barreled Shotguns Crate"
+	desc = "Defend your home and kill the undead with these civilian-grade shotguns. \
+		Contains three NT-designed Double-Barreled Shotguns. Ammo sold seperately."
+	cost = CARGO_CRATE_VALUE * 8
+	contains = list(/obj/item/gun/ballistic/shotgun/doublebarrel = 3)
+	crate_name = "double-barreled shotguns crate"
+
+/datum/supply_pack/security/armory/riotshotgun
+	name = "Riot Shotguns Crate"
+	desc = "Stop resistance with these standard-issue shotguns. \
+		Contains three NT-designed Riot Shotguns. Ammo sold seperately."
+	cost = CARGO_CRATE_VALUE * 12
+	contains = list(/obj/item/gun/ballistic/shotgun/riot = 3)
+	crate_name = "riot shotguns crate"
+
 /datum/supply_pack/security/armory/ballistic
 	name = "Combat Shotguns Crate"
 	desc = "For when the enemy absolutely needs to be replaced with lead. \
@@ -219,6 +257,14 @@
 	contains = list(/obj/item/gun/ballistic/shotgun/automatic/combat = 3,
 					/obj/item/storage/belt/bandolier = 3)
 	crate_name = "combat shotguns crate"
+
+/datum/supply_pack/security/armory/detrevolver
+	name = ".38 Revolvers Crate"
+	desc = "Become a cold-hearted detective with these specialty police revolvers. \
+		Contains three NT-designed .38 Revolvers. Ammo sold seperately."
+	cost = CARGO_CRATE_VALUE * 17
+	contains = list(/obj/item/gun/ballistic/revolver/c38 = 3)
+	crate_name = ".38 revolvers crate"
 
 /datum/supply_pack/security/armory/dragnet
 	name = "DRAGnet Translocation Shotgun Crate"
