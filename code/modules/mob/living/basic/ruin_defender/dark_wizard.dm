@@ -24,17 +24,11 @@
 	unsuitable_heat_damage = 0
 	ai_controller = /datum/ai_controller/basic_controller/dark_wizard
 
-/mob/living/basic/dark_wizard/get_save_vars()
-	return ..() - NAMEOF(src, icon_state) // icon_state is applied via apply_dynamic_human_appearance()
-
 /mob/living/basic/dark_wizard/Initialize(mapload)
 	. = ..()
-
 	apply_dynamic_human_appearance(src, mob_spawn_path = /obj/effect/mob_spawn/corpse/human/wizard/dark, r_hand = /obj/item/staff)
 	add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), INNATE_TRAIT)
-
-	var/corpse = string_list(list(/obj/effect/decal/remains/human))
-	AddElement(/datum/element/death_drops, corpse)
+	AddElement(/datum/element/death_drops, /obj/effect/decal/remains/human)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_SHOE)
 	AddElement(/datum/element/ai_retaliate)
 

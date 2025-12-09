@@ -17,10 +17,9 @@
 
 	create_storage(storage_type = storage_type)
 
-	PopulateContents()
-
-	for (var/obj/item/item in src)
-		item.item_flags |= IN_STORAGE
+	if(!(obj_flags & CONTENTS_INITIALIZED))
+		obj_flags |= CONTENTS_INITIALIZED
+		PopulateContents()
 
 /obj/item/storage/create_storage(
 	max_slots,

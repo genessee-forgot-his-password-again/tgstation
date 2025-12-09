@@ -485,6 +485,15 @@
 	default = 6
 	min_val = -1
 
+/// Freebie quirk points. Can't go negative because we have no way of enforcing a person has a quirk before they join.
+/datum/config_entry/number/default_quirk_points
+	default = 2
+	min_val = 0
+
+/// Max personalities you can have at once
+/datum/config_entry/number/max_personalities
+	default = 5
+
 /**
  * A config that skews with the random spawners weights
  * If the value is lower than 1, it'll tend to even out the odds
@@ -524,6 +533,14 @@
 	integer = FALSE
 	default = 4 // every 4 hours
 	min_val = -1
+/// The max amount of objects that can be saved on a single turf (rest get skipped)
+/datum/config_entry/number/persistent_max_object_limit_per_turf
+	default = 100
+	min_val = 1
+/// The max amount of mobs that can be saved on a single turf (rest get skipped)
+/datum/config_entry/number/persistent_max_mob_limit_per_turf
+	default = 5
+	min_val = 1
 /// The maximum amount of autosaves to store (set to -1 to never delete any autosaves)
 /datum/config_entry/number/persistent_max_autosaves
 	default = -1

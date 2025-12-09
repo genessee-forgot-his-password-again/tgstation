@@ -1,12 +1,15 @@
 #define FILE_RECENT_MAPS "data/RecentMaps.json"
 #define KEEP_ROUNDS_MAP 3
 #define INFINITE_AUTOSAVES -1
+#define SAVE_COMPLETION_MARKER "save_complete.txt"
 
 SUBSYSTEM_DEF(persistence)
 	name = "Persistence"
 	dependencies = list(
 		/datum/controller/subsystem/mapping,
 		/datum/controller/subsystem/atoms,
+		/datum/controller/subsystem/machines,
+		/datum/controller/subsystem/shuttle,
 	)
 	flags = SS_BACKGROUND
 	wait = INFINITY
@@ -72,6 +75,18 @@ SUBSYSTEM_DEF(persistence)
 
 	/// A list of map config jsons used by persistence organized by z-level traits
 	var/list/map_configs_cache
+	/// Tracking variables for save metrics
+	var/list/current_save_metrics = list()
+	/// Current z-level being saved
+	var/current_save_z_level = 0
+	/// Current x coordinate being processed
+	var/current_save_x = 0
+	/// Current y coordinate being processed
+	var/current_save_y = 0
+	/// Whether a save operation is currently in progress
+	var/save_in_progress = FALSE
+	/// Areas that have been counted
+	var/list/counted_areas = list()
 
 /datum/controller/subsystem/persistence/Initialize()
 	load_poly()
@@ -89,6 +104,30 @@ SUBSYSTEM_DEF(persistence)
 	if(CONFIG_GET(number/persistent_autosave_period) > 0 && CONFIG_GET(flag/persistent_save_enabled))
 		wait = CONFIG_GET(number/persistent_autosave_period) HOURS
 
+	for(var/obj/child in GLOB.save_containers_children)
+		var/parent_id = child.save_container_child_id
+		child.forceMove(GLOB.save_containers_parents[parent_id])
+		child.save_container_child_id = null
+
+	for(var/parent_id in GLOB.save_containers_parents)
+		var/obj/parent = GLOB.save_containers_parents[parent_id]
+		parent.update_appearance()
+		parent.save_container_parent_id = null
+
+	if(SSatoms.persistent_loaders.len)
+		if(CONFIG_GET(flag/persistent_save_enabled))
+			for(var/I in 1 to SSatoms.persistent_loaders.len)
+				var/atom/A = SSatoms.persistent_loaders[I]
+				//I hate that we need this
+				if(QDELETED(A))
+					continue
+				A.PersistentInitialize()
+			testing("Persistent initialized [persistent_loaders.len] atoms")
+		SSatoms.persistent_loaders.Cut()
+
+	GLOB.save_containers_parents.Cut()
+	GLOB.save_containers_children.Cut()
+
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/persistence/fire(resumed = FALSE)
@@ -99,12 +138,12 @@ SUBSYSTEM_DEF(persistence)
 	save_world()
 
 /// Saves map z-levels in the world based on PERSISTENT_SAVE_ENABLED config options in config/persistence.txt
-/datum/controller/subsystem/persistence/proc/save_world()
+/datum/controller/subsystem/persistence/proc/save_world(list/z_levels, silent=FALSE)
 	log_world("World map save initiated at [time_stamp()]")
-	to_chat(world, span_boldannounce("World map save initiated at [time_stamp()]"))
-	save_persistent_maps()
-	to_chat(world, span_boldannounce("World map save finished at [time_stamp()]"))
-	log_world("World map save finished at [time_stamp()]")
+	if(!silent)
+		to_chat(world, span_boldannounce("World map save initiated at [time_stamp()]"))
+
+	save_persistent_maps(z_levels, silent)
 	prune_old_autosaves()
 
 ///Collects all data to persist.
@@ -176,10 +215,42 @@ SUBSYSTEM_DEF(persistence)
 	var/map_directory = MAP_PERSISTENT_DIRECTORY + timestamp_utc
 	return map_directory
 
+/datum/controller/subsystem/persistence/proc/is_save_valid(save_directory_name)
+	var/full_path = MAP_PERSISTENT_DIRECTORY + save_directory_name
+	var/completion_marker_path = "[full_path]/[SAVE_COMPLETION_MARKER]"
+
+	if(!fexists(completion_marker_path))
+		log_mapping("Save [save_directory_name] is incomplete - missing completion marker")
+		return FALSE
+
+	var/list/save_files = flist(full_path)
+	if(save_files.len <= 1)
+		log_mapping("Save [save_directory_name] appears empty except for completion marker")
+		return FALSE
+
+	return TRUE
+
 ///Deletes empty save directories and removes the oldest saves if the total count exceeds the max autosaves allowed in config
 /datum/controller/subsystem/persistence/proc/prune_old_autosaves()
 	if(!CONFIG_GET(flag/persistent_save_enabled))
 		return
+
+	// First, remove any corrupted/incomplete saves
+	var/list/all_saves_raw = flist(MAP_PERSISTENT_DIRECTORY)
+	for(var/save_directory in all_saves_raw)
+		var/full_path = MAP_PERSISTENT_DIRECTORY + save_directory
+
+		if(!flist(full_path).len)
+			log_mapping("Deleted empty autosave: [full_path]")
+			log_admin("Deleted empty autosave: [full_path]")
+			fdel(full_path)
+			continue
+
+		if(!is_save_valid(save_directory))
+			log_mapping("Deleted corrupted autosave: [full_path]")
+			log_admin("Deleted corrupted autosave: [full_path]")
+			fdel(full_path)
+
 	if(CONFIG_GET(number/persistent_max_autosaves) == INFINITE_AUTOSAVES)
 		return
 
@@ -199,24 +270,37 @@ SUBSYSTEM_DEF(persistence)
 		log_admin("Deleted oldest autosave: [oldest_autosave_full_path]")
 		fdel(oldest_autosave_full_path)
 
-/// Returns the directory path to the last save if it exists
 /datum/controller/subsystem/persistence/proc/get_last_save()
 	// organize by newest saves first
 	var/list/all_saves = get_all_saves(GLOBAL_PROC_REF(cmp_text_dsc))
 	if(!all_saves.len)
-		return // no saves exist yet
+		return null // no saves exist yet
 
-	return all_saves[1]
+	for(var/save_directory in all_saves)
+		if(is_save_valid(save_directory))
+			log_mapping("Using save: [save_directory]")
+			return save_directory
+		else
+			log_mapping("Skipping corrupted/incomplete save: [save_directory]")
+
+	log_mapping("ERROR: No valid saves found!")
+	return null
 
 /// Based on the last recent save, get a list of all z levels as numbers which have the specific trait
 /// Will return null if no traits match or a save file doesn't exist yet
 /datum/controller/subsystem/persistence/proc/cache_z_levels_map_configs()
-	var/last_save = MAP_PERSISTENT_DIRECTORY + get_last_save()
-	if(!last_save)
-		return null // no saves exist yet
+	var/last_save_name = get_last_save()
+	if(!last_save_name)
+		log_world("WARNING: No valid persistence saves found")
+		return null // no valid saves exist
+
+	var/last_save = MAP_PERSISTENT_DIRECTORY + last_save_name
 
 	var/list/matching_z_levels = list()
 	var/list/last_save_files = flist(last_save)
+
+	// Filter out the completion marker file
+	last_save_files -= SAVE_COMPLETION_MARKER
 
 	// prune the map .dmm files from our list since we only need JSONs
 	for(var/dmm_file in last_save_files)
@@ -285,16 +369,12 @@ SUBSYSTEM_DEF(persistence)
  */
 /datum/controller/subsystem/persistence/proc/get_all_saves(sorting_method)
 	var/list/all_saves = flist(MAP_PERSISTENT_DIRECTORY)
+	var/list/valid_saves = list()
 
 	// Prune any empty save directories
 	for(var/path in all_saves)
-		var/full_path = MAP_PERSISTENT_DIRECTORY + path
-
-		if(!flist(full_path).len) // empty save directory
-			log_mapping("Deleted empty autosave: [full_path]")
-			log_admin("Deleted empty autosave: [full_path]")
-			all_saves -= full_path
-			fdel(full_path)
+		if(is_save_valid(path))
+			valid_saves += path
 
 	sortTim(all_saves, sorting_method)
 	return all_saves
@@ -306,24 +386,45 @@ SUBSYSTEM_DEF(persistence)
 
 	if(persistent_save_flags["objects"])
 		flags |= SAVE_OBJECTS
+	if(persistent_save_flags["objects_variables"])
+		flags |= SAVE_OBJECTS_VARIABLES
+	if(persistent_save_flags["objects_properties"])
+		flags |= SAVE_OBJECTS_PROPERTIES
+
 	if(persistent_save_flags["mobs"])
 		flags |= SAVE_MOBS
+
 	if(persistent_save_flags["turfs"])
 		flags |= SAVE_TURFS
+	if(persistent_save_flags["turfs_atmos"])
+		flags |= SAVE_TURFS_ATMOS
+	if(persistent_save_flags["turfs_space"])
+		flags |= SAVE_TURFS_SPACE
+
 	if(persistent_save_flags["areas"])
 		flags |= SAVE_AREAS
-	if(persistent_save_flags["space"])
-		flags |= SAVE_SPACE
-	if(persistent_save_flags["object_properties"])
-		flags |= SAVE_OBJECT_PROPERTIES
-	if(persistent_save_flags["atmos"])
-		flags |= SAVE_ATMOS
+	if(persistent_save_flags["areas_default_shuttles"])
+		flags |= SAVE_AREAS_DEFAULT_SHUTTLES
+	if(persistent_save_flags["areas_custom_shuttles"])
+		flags |= SAVE_AREAS_CUSTOM_SHUTTLES
 
 	return flags
 
-/datum/controller/subsystem/persistence/proc/save_persistent_maps()
+/datum/controller/subsystem/persistence/proc/save_persistent_maps(list/z_levels, silent=FALSE)
+	save_in_progress = TRUE
+	current_save_metrics = list()
+	counted_areas = list()
+
+	GLOB.TGM_objs = 0
+	GLOB.TGM_mobs = 0
+	GLOB.TGM_total_objs = 0
+	GLOB.TGM_total_mobs = 0
+	GLOB.TGM_total_turfs = 0
+	GLOB.TGM_total_areas = 0
+
 	var/map_save_directory = get_current_persistence_map_directory()
 	var/save_flags = get_save_flags()
+	var/overall_save_start = REALTIMEOFDAY
 	var/list/persistent_save_z_levels = CONFIG_GET(keyed_list/persistent_save_z_levels)
 
 	for(var/z in 1 to world.maxz)
@@ -335,23 +436,26 @@ SUBSYSTEM_DEF(persistence)
 			z_traits["yi"] = level_to_check.yi
 		level_traits += list(z_traits)
 
-		// skip saving certain z-levels depending on config settings
-		if(!persistent_save_z_levels[ZTRAIT_CENTCOM] && is_centcom_level(z))
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_STATION] && is_station_level(z))
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_SPACE_EMPTY] && is_space_empty_level(z))
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_SPACE_RUINS] && is_space_ruins_level(z))
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_ICE_RUINS] && is_ice_ruins_level(z))
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_MINING] && is_mining_level(z))
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_RESERVED] && is_reserved_level(z)) // for shuttles in transit (hyperspace)
-			continue
-		else if(!persistent_save_z_levels[ZTRAIT_AWAY] && is_away_level(z)) // gateway away missions
-			continue
+		if(z_levels) // Skip saving z-levels based on num
+			if(!z_levels[num2text(z)])
+				continue
+		else // Skip saving certain z-levels based on config settings
+			if(!persistent_save_z_levels[ZTRAIT_CENTCOM] && is_centcom_level(z))
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_STATION] && is_station_level(z))
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_SPACE_EMPTY] && is_space_empty_level(z))
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_SPACE_RUINS] && is_space_ruins_level(z))
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_ICE_RUINS] && is_ice_ruins_level(z))
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_MINING] && is_mining_level(z))
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_RESERVED] && is_reserved_level(z)) // for shuttles in transit (hyperspace)
+				continue
+			else if(!persistent_save_z_levels[ZTRAIT_AWAY] && is_away_level(z)) // gateway away missions
+				continue
 
 		var/bottom_z = z
 		var/top_z = z
@@ -371,13 +475,20 @@ SUBSYSTEM_DEF(persistence)
 					top_z = above_z
 					break
 
-		var/map = write_map(1, 1, bottom_z, world.maxx, world.maxy, top_z, save_flags)
+		// Update progress tracking for this z-level
+		current_save_z_level = z
+		current_save_x = 0
+		current_save_y = 0
+		var/z_objs_start = GLOB.TGM_total_objs
+		var/z_mobs_start = GLOB.TGM_total_mobs
+		var/z_turfs_start = GLOB.TGM_total_turfs
+		var/z_areas_start = GLOB.TGM_total_areas
 
+		var/z_save_time_start = REALTIMEOFDAY
+		var/map = write_map(1, 1, bottom_z, world.maxx, world.maxy, top_z, save_flags)
 		var/file_path = "[map_save_directory]/[z].dmm"
 		rustg_file_write(map, file_path)
-
 		var/map_path = copytext(map_save_directory, 7) // drop the "_maps/" from directory
-
 		var/json_data = list(
 			"version" = MAP_CURRENT_VERSION,
 			"map_name" = level_to_check.name || CUSTOM_MAP_PATH,
@@ -399,9 +510,48 @@ SUBSYSTEM_DEF(persistence)
 
 		rustg_file_write(json_encode(json_data, JSON_PRETTY_PRINT), "[map_save_directory]/[z].json")
 
-ADMIN_VERB(map_export_all, R_DEBUG, "Map Export All", "Saves all z-levels that are have their persistent save config enabled.", ADMIN_CATEGORY_DEBUG)
-	SSpersistence.save_persistent_maps()
+		var/z_save_time_end = (REALTIMEOFDAY - z_save_time_start) / 10
+		current_save_metrics += list(list(
+			"z-level" = bottom_z,
+			"multi z-levels" = top_z - bottom_z,
+			"save_time_seconds" = z_save_time_end,
+			"mobs_saved" = GLOB.TGM_total_mobs - z_mobs_start,
+			"objs_saved" = GLOB.TGM_total_objs - z_objs_start,
+			"turfs_saved" = GLOB.TGM_total_turfs - z_turfs_start,
+			"areas_saved" = GLOB.TGM_total_areas - z_areas_start,
+		))
+
+	var/overall_save_time_end = (REALTIMEOFDAY - overall_save_start) / 10
+	var/completion_data = list(
+		"save_completed" = TRUE,
+		"timestamp" = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"),
+		"total_save_time_seconds" = overall_save_time_end,
+		"z_level_metrics" = current_save_metrics
+	)
+	var/completion_marker_path = "[map_save_directory]/[SAVE_COMPLETION_MARKER]"
+	rustg_file_write(json_encode(completion_data, JSON_PRETTY_PRINT), completion_marker_path)
+
+	// Reset progress tracking
+	save_in_progress = FALSE
+	current_save_z_level = 0
+	current_save_x = 0
+	current_save_y = 0
+	counted_areas = list()
+	if(!silent)
+		to_chat(world, span_boldannounce("World map save finished at [time_stamp()]"))
+	log_world("World map save finished at [time_stamp()]")
+
+/// Gets the current progress percentage for the active z-level
+/datum/controller/subsystem/persistence/proc/get_current_progress_percent()
+	if(!save_in_progress)
+		return 0
+
+	var/total_tiles = world.maxx * world.maxy
+	var/completed_tiles = (current_save_x * world.maxy) + current_save_y
+
+	return (completed_tiles / total_tiles) * 100
 
 #undef FILE_RECENT_MAPS
 #undef KEEP_ROUNDS_MAP
 #undef INFINITE_AUTOSAVES
+#undef SAVE_COMPLETION_MARKER

@@ -40,22 +40,14 @@
 /obj/item/stock_parts/power_store/get_cell()
 	return src
 
-/obj/item/stock_parts/power_store/get_save_vars()
-	. = ..()
-	. += NAMEOF(src, charge)
-	. += NAMEOF(src, rigged)
-	return .
-
 /obj/item/stock_parts/power_store/Initialize(mapload, override_maxcharge)
 	. = ..()
 	create_reagents(5, INJECTABLE | DRAINABLE)
 	if (override_maxcharge)
 		maxcharge = override_maxcharge
 	rating = max(round(maxcharge / (rating_base * 10), 1), 1)
-	if(!charge)
+	if(!empty && !charge)
 		charge = maxcharge
-	if(empty)
-		charge = 0
 	if(ratingdesc)
 		desc += " This one has a rating of [display_energy(maxcharge)][prob(10) ? ", and you should not swallow it" : ""]." //joke works better if it's not on every cell
 	update_appearance()

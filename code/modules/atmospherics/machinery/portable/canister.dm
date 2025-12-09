@@ -18,6 +18,7 @@
 	integrity_failure = 0.4
 	pressure_resistance = 7 * ONE_ATMOSPHERE
 	req_access = list()
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10)
 
 	///Is the valve open?
 	var/valve_open = FALSE
@@ -48,12 +49,6 @@
 	bomb = 10
 	fire = 80
 	acid = 50
-
-/obj/machinery/portable_atmospherics/canister/get_save_vars()
-	. = ..()
-	. += NAMEOF(src, valve_open)
-	. += NAMEOF(src, release_pressure)
-	return .
 
 /obj/machinery/portable_atmospherics/canister/Initialize(mapload)
 	. = ..()

@@ -13,15 +13,6 @@
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/noticeboard, 32)
 
-/obj/structure/noticeboard/on_object_saved()
-	var/data
-
-	for(var/obj/item/paper/paper in contents)
-		var/metadata = generate_tgm_metadata(paper)
-		data += "[data ? ",\n" : ""][paper.type][metadata]"
-
-	return data
-
 /obj/structure/noticeboard/Initialize(mapload)
 	. = ..()
 
@@ -35,7 +26,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/noticeboard, 32)
 		paper.forceMove(src)
 		notices++
 	update_appearance(UPDATE_ICON)
-	find_and_hang_on_wall()
+	if(mapload)
+		find_and_mount_on_atom()
 
 //attaching papers!!
 /obj/structure/noticeboard/attackby(obj/item/O, mob/user, list/modifiers, list/attack_modifiers)
