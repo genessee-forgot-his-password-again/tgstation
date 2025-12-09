@@ -33,9 +33,9 @@
 		Iceblox speedloader - all for the .38 revolver."
 	cost = CARGO_CRATE_VALUE * 7
 	access_view = ACCESS_ARMORY
-	contains = list(/obj/item/ammo_box/c38 = 5,
-					/obj/item/ammo_box/c38/hotshot,
-					/obj/item/ammo_box/c38/iceblox
+	contains = list(/obj/item/ammo_box/speedloader/c38 = 5,
+					/obj/item/ammo_box/speedloader/c38/hotshot,
+					/obj/item/ammo_box/speedloader/c38/iceblox
 				)
 	crate_name = ".38 speedloaders crate"
 
