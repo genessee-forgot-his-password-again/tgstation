@@ -82,11 +82,11 @@
 	cost_per_order = 6000
 
 /datum/orderable_item/mining/detrevolver_sl
-	purchase_path = /obj/item/ammo_box/c38
+	purchase_path = /obj/item/ammo_box/speedloader/c38
 	cost_per_order = 100
 
 /datum/orderable_item/mining/detrevolver_sldd
-	purchase_path = /obj/item/ammo_box/c38/dumdum
+	purchase_path = /obj/item/ammo_box/speedloader/c38/dumdum
 	cost_per_order = 250
 
 /datum/orderable_item/mining/detrevolver
