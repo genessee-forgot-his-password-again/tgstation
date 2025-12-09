@@ -85,10 +85,3 @@
 	desc = parent_type::desc + " Flare casings launch a concentrated particle beam towards a target, lighting them up for everyone to see."
 	ammo_type = /obj/item/ammo_casing/c38/flare
 	ammo_band_color = COLOR_AMMO_HELLFIRE
-
-/obj/item/ammo_box/magazine/p16
-	name = "assault rifle magazine (5.56mm)"
-	icon_state = "p16"
-	ammo_type = /obj/item/ammo_casing/a556
-	caliber = CALIBER_556
-	max_ammo = 30
