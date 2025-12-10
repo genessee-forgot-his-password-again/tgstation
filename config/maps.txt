@@ -68,3 +68,6 @@ endmap
 
 map construction
 endmap
+
+map nations
+endmap
